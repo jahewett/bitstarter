@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+// Homework 3 Part 3 - James Hewett
+// Modified grader.js, now inspects urls for tags given in checks file
 /*
 Automatically grade files for the presence of specified HTML tags/attributes.
 Uses commander.js and cheerio. Teaches command line application development
@@ -76,7 +78,7 @@ var checkUrl = function(url, checksfile) {
   		} else {
 			var $ = cheerioHtmlFile(result);
 			var urlJsonData = checkHtmlTags($, checksfile); 
-			console.log(url.toString(), "results: ", JSON.stringify(urlJsonData, null, 4));
+			console.log(JSON.stringify(urlJsonData, null, 4));
   		}
 	});
 };
@@ -90,14 +92,14 @@ if(require.main == module) {
 	
 	if(program.url)
 	{	
-		var output = checkUrl(program.url, program.checks);	
+		checkUrl(program.url, program.checks);	
 	}
 	
 	if(program.file)
 	{
     		var checkJson = checkHtmlFile(program.file, program.checks);
-    		var outJson = JSON.stringify(checkJson, null, 4);
-    		console.log(program.file, "results: ", outJson);		
+    		var outputJsonData = JSON.stringify(checkJson, null, 4);
+    		console.log(outputJsonData);		
 	}
 } else {
     exports.checkHtmlFile = checkHtmlFile;
